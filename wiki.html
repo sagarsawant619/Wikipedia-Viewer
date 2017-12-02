@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<style>
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro|Montserrat' rel='stylesheet' type='text/css'>
+
+body {
+  background-color: lightblue;
+}
+
+.content-wrap {
+  margin-top: 40px;
+}
+
+h1 {
+  font-size: 50px;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#search {
+  width: 300px;
+  height:30px;
+  padding-left: 10px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  outline: none;
+}
+
+.btn-default {
+  margin: 4px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+  color: black;
+}
+
+.btn-default:hover {
+  opacity: 0.9;
+  color: black;
+}
+
+button {
+  width: 100px;
+  background-color: brown !important;
+  outline: none !important;
+}
+
+#randomResult {
+  display: inline-block;
+  width: 165px;
+  background-color: orange !important;
+  outline: none !important;
+}
+
+a {
+  display: block;
+  margin: 10px;
+  padding: 0 50px;
+  padding: 20px;
+  text-align: justify;
+  color: #000;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #000;
+  border-left: 4px solid #FF8C00;
+}
+
+.title {
+  margin-bottom: 15px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.text {
+  font-size: 15px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+@media screen and (max-width: 350px) {
+  h1 {
+    font-size: 35px;
+  }
+  
+  #search {
+    width: 100%;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .text {
+    font-size: 15px;
+  }
+}
+</style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="en-GB">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+ </head>
+    
+<body>
+<div class="container">
+  <div class="content-wrap text-center">
+    <h1>WIKIPEDIA VIEWER</h1>
+    <input id="search" type="text" placeholder="Search Wikipedia">
+    <button id="getResult" class="btn btn-default">Search</button>
+    <a id="randomResult" class="btn btn-default" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Search</a>
+    </div>
+    <div class="wrap text-center">
+      <ul>
+      </ul>
+    </div>
+  </div>
+  </body>
+  
+  
+   <script src="https://code.jquery.com/jquery-2.2.4.min.js"> </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"> </script>
+   
+  <script>
+  
+  $(document).ready(function(){
+  $("#getResult").click(function(){
+    $("ul").empty();
+    var search = $("#search").val();
+    $.ajax({
+      type: 'GET',
+      url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + search,
+      dataType: 'jsonp',
+      success: function(result) {
+        console.log(result);
+        var obj = result.query.pages;
+        for(var prop in obj) {
+          $("ul").append('<a target="_blank" href="https://en.wikipedia.org/wiki?curid=' + obj[prop].pageid + '">' + '<li><h3 class="title ">' + obj[prop].title + '</h3><p class="text">' + obj[prop].extract + '</p></li></a>');
+        }
+      }
+    });
+  });
+  
+  $("#search").keypress(function(e){
+    if(e.which == 13) {
+      $("#getResult").click();
+    }
+  });
+  
+  $('#getResult, #randomResult').click(function() {
+    $(this).blur();
+  });
+});
+  </script>
+</html>
