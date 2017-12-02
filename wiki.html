@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-GB">
-<head>
-<style>
-<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+<!-- saved from url=(0088)https://s.codepen.io/boomerang/iFrameKey-f7934fc2-542f-9e74-77a6-9a27b9c64520/index.html -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js.download"></script><script src="./events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js.download"></script><script src="./css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js.download"></script><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico"><link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111"><link rel="canonical" href="https://codepen.io/sas619/pen/GOzjMr">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro|Montserrat' rel='stylesheet' type='text/css'>
-
-body {
+<link href="./css(1)" rel="stylesheet" type="text/css">
+<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<style type="text/css" class="cp-pen-styles">body{
   background-color: lightblue;
 }
 
@@ -103,16 +102,7 @@ ul li {
   .text {
     font-size: 15px;
   }
-}
-</style>
-
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Language" content="en-GB">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-   
- </head>
-    
-<body>
+}</style></head><body>
 <div class="container">
   <div class="content-wrap text-center">
     <h1>WIKIPEDIA VIEWER</h1>
@@ -125,15 +115,8 @@ ul li {
       </ul>
     </div>
   </div>
-  </body>
-  
-  
-   <script src="https://code.jquery.com/jquery-2.2.4.min.js"> </script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"> </script>
-   
-  <script>
-  
-  $(document).ready(function(){
+<script src="./jquery-2.2.4.min.js.download"></script><script src="./jquery-ui.min.js.download"></script>
+<script>$(document).ready(function(){
   $("#getResult").click(function(){
     $("ul").empty();
     var search = $("#search").val();
@@ -144,9 +127,11 @@ ul li {
       success: function(result) {
         console.log(result);
         var obj = result.query.pages;
-        for(var prop in obj) {
+        for(var prop in obj) {if (window.CP.shouldStopExecution(1)){break;}
           $("ul").append('<a target="_blank" href="https://en.wikipedia.org/wiki?curid=' + obj[prop].pageid + '">' + '<li><h3 class="title ">' + obj[prop].title + '</h3><p class="text">' + obj[prop].extract + '</p></li></a>');
         }
+window.CP.exitedLoop(1);
+
       }
     });
   });
@@ -161,5 +146,6 @@ ul li {
     $(this).blur();
   });
 });
-  </script>
-</html>
+//# sourceURL=pen.js
+</script>
+</body></html>
